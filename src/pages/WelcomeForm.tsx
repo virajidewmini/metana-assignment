@@ -10,9 +10,15 @@ interface WelcomeFormProps {
 }
 
 const WelcomeForm: React.FC<WelcomeFormProps>= ({goBack,onUpdate})=>{
-    const [title, setTitle] = useState("Welcome to our form");
-    const [description, setDescription] = useState("Welcome to the Home page! This is the main page of our website.");
-    const [buttonText, setButtonText] = useState("Start");
+    const [title, setTitle] = useState(() => localStorage.getItem('formDetails')
+        ? JSON.parse(localStorage.getItem('formDetails') || '').title
+        : 'Welcome to our form');
+    const [description, setDescription] = useState (() => localStorage.getItem('formDetails')
+        ? JSON.parse(localStorage.getItem('formDetails') || '').description
+        : 'Welcome to the Home page! This is the main page of our website.');
+    const [buttonText, setButtonText] = useState(() => localStorage.getItem('formDetails')
+        ? JSON.parse(localStorage.getItem('formDetails') || '').buttonText
+        : 'Start');
 
     console.log(title);
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +46,7 @@ const WelcomeForm: React.FC<WelcomeFormProps>= ({goBack,onUpdate})=>{
             buttonText,
         };
         localStorage.setItem('formDetails', JSON.stringify(formData));
-        alert('Details saved successfully!');
+        goBack()
     };
 
     const handleDiscard =() =>{

@@ -10,17 +10,18 @@ const Home = () => {
 
     const [currentView, setCurrentView] = useState('home');
     const goToWelcomeForm = () => {
-        setCurrentView('email');
+        setCurrentView('welcome');
     };
 
     const goBack = () => {
         setCurrentView('home');
     };
 
-    const [formDetails, setFormDetails] = useState({
-        title: "Welcome to our form",
-        description: "Welcome to the Home page! This is the main page of our website.",
-        buttonText: "Start"
+    const [formDetails, setFormDetails] = useState(() => {
+        const savedData = localStorage.getItem('formDetails');
+        return savedData
+            ? JSON.parse(savedData)
+            : { title: "Welcome to our form", description: "Welcome to the Home page! This is the main page of our website.", buttonText: "Start" };
     });
 
     const updateFormDetails = (title: string, description: string, buttonText: string) => {
