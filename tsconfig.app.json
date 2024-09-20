@@ -14,10 +14,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    "compilerOptions": {
-      "forceConsistentCasingInFileNames": true
-    },
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
